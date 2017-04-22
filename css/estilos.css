@@ -1,0 +1,43 @@
+.candidatos-disponibles{
+  display: flex;
+  justify-content: space-around;
+      flex-wrap: wrap;
+}
+
+figure.candidato {
+  min-width: 200px;
+  max-width: 500px;
+  width: 30%;
+  float: right;
+  margin-right: 45px;
+}
+
+figure.blanco {
+  min-width: 200px;
+  max-width: 500px;
+  width: 30%;
+  float: left;
+  margin-left: 45px;
+}
+
+figure.candidato img{
+  width: 100%;
+
+}
+.candidato figcaption{
+  border-top: solid #1C1515 1px;
+  font-family: raspoutin;
+  font-weight: bold;
+  margin-top: 15px;
+  padding: 8px;
+  text-align: center;
+}
+
+.blanco figcaption {
+    border-top: solid #1C1515 1px;
+    font-family: raspoutin;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 8px;
+    text-align: center;
+}
