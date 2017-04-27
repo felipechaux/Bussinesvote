@@ -1,7 +1,7 @@
 Las tecnologías a usar son :
 
-HTML5
-Javascript
+HTML5,
+Javascript,
 Jquery 
  y PHP
 
