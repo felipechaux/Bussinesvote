@@ -1,4 +1,4 @@
-Las tecnologías a usar son :
+**Las tecnologías a usar son** :
 
 HTML5,
 Javascript,
@@ -7,7 +7,7 @@ Jquery
 
 
 
-Framework para FrontEnd :
+**Framework para FrontEnd** :
 
 Bosstrap 
 
