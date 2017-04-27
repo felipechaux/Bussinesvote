@@ -3,10 +3,16 @@ Las tecnologías a usar son :
 HTML5
 Javascript
 Jquery 
-PHP
+ y PHP
 
 
 
 Framework para FrontEnd :
 
 Bosstrap 
+
+
+Servidor
+- [Call4Papers] (https://www.apachefriends.org/es/download.html)
+
+
