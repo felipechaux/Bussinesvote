@@ -1,4 +1,4 @@
-**Las tecnologías a usar son** :
+**Las tecnologías a usar son** : cambios-->
 
 HTML5,
 Javascript,
