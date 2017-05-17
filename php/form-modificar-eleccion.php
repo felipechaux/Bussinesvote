@@ -125,6 +125,7 @@ header("Location: ../admin/index.php");
                             <li class="hvr-bounce-to-bottom"><a href="../admin/index.php">Inicio</a></li>
                             <li class="hvr-bounce-to-bottom"><a href="../php/form-registro-candidato.php">Inscribir candidato</a></li>
                             <li class="hvr-bounce-to-bottom"><a href="form-registro-eleccion.php">Crear elección</a></li>
+                            <li class="hvr-bounce-to-bottom"><a href="reportes.php">Reportes</a></li>
                             <li class="hvr-bounce-to-bottom"><a href="#">Administrador: <?php $obj = new Usuario();
                             $obj->rol=1;
                             $obj->Session();?></a></li>

@@ -6,6 +6,13 @@ require_once("../php/clases/class-eleccion.php");
 if(isset($_GET['volver'])){
 header("Location: ../admin/index.php");
 }
+if(isset($_GET['reporte2'])){
+ if(isset($_POST['tipo-eleccion']) ){
+        $ideleccion=$_POST['tipo-eleccion'];
+        $conexion = new conexion();
+        $conexion=$conexion->dbconexion();
+       }
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,9 +90,28 @@ header("Location: ../admin/index.php");
                 <div class="col-md-6 contact-top-right">
                         <div class="contact-textarea">
                                <ul>
-                                   <li><a href="">Resultados de una votación</a> </li>
-                                   <li><a href="">Rendimiento de cada candidato</a> </li>
+                                   <li><a href="?reporte1">Resultados de votaciónes</a> </li>
+                                   <li><a href="?reporte2">Rendimiento de candidatos</a> </li>
                                </ul>
+                               <div>
+                               <form method="POST">
+                                   <?php 
+
+                                     if (isset($_GET['reporte2'])){
+                                     //listar elecciones 
+                                     $obj = new Eleccion();
+                                     $obj->listar(); 
+                                     echo "<input type='submit' value='Generar'>";
+
+                                     }
+
+                                    
+
+                                    ?>
+                                    
+                               </form>
+                                   
+                               </div>
                                
                         </div>
                 </div>
@@ -99,30 +125,32 @@ header("Location: ../admin/index.php");
 
 require_once("conexion.php");
 
-
-
 ?>
 <div style="width: 50%">
             <canvas id="canvas" height="450" width="600"></canvas>
         </div>
 
+    
 
+    <div> 
     <script>
     var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 
     var barChartData = {
         labels : [
        <?php
-       $conexion = new conexion();
-       $conexion=$conexion->dbconexion();
+      
+       
 
-        $sql = "SELECT  tbl_usuario.nombre_usuario,count(tbl_voto.documento_c) from tbl_voto 
-        INNER JOIN tbl_usuario on tbl_voto.documento_c =tbl_usuario.documento group by tbl_voto.documento_c ";
+        $sql = "SELECT  tbl_usuario.nombre_usuario,
+        count(tbl_voto.documento_c)
+        from tbl_voto 
+        INNER JOIN tbl_usuario on tbl_voto.documento_c =tbl_usuario.documento
+        where tbl_voto.id_eleccion='$ideleccion' 
+        group by tbl_voto.documento_c  ";
         $result=mysqli_query($conexion,$sql); 
         while($row=mysqli_fetch_array($result))
         {
-           
-            
          ?>
 
            '<?php echo $row[0]?>',
@@ -143,7 +171,10 @@ require_once("conexion.php");
                 <?php
      
 
-        $sql = "SELECT  count(documento_c) from tbl_voto group by documento_c ";
+        $sql = "SELECT  count(documento_c)
+         from tbl_voto
+         where id_eleccion='$ideleccion'
+         group by documento_c ";
         $result=mysqli_query($conexion,$sql); 
         while($row=mysqli_fetch_array($result))
         {
@@ -166,5 +197,6 @@ require_once("conexion.php");
     }
 
     </script>
+    </div>
 </body>
 </html>
