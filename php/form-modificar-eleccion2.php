@@ -1,7 +1,8 @@
+
 <?php
 
-require_once("../php/clases/class-usuario.php");
-require_once("../php/clases/class-eleccion.php");
+include("../php/clases/class-usuario.php");
+include("../php/clases/class-eleccion.php");
 
 if(isset($_GET['volver'])){
 header("Location: ../admin/index.php");
@@ -39,29 +40,10 @@ header("Location: ../admin/index.php");
     <script src="../js/calendar-es.js"></script>
     <!-- script validacion de campos -->
     <script type="text/javascript">
-       function soloNumeros(e){
-      var key = window.Event ? e.which : e.keyCode
-      return (key >= 48 && key <= 57)
-    }
-
-
-    //aquino
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = [8, 37, 39, 46];
-
-        tecla_especial = false
-        for(var i in especiales) {
-            if(key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if(letras.indexOf(tecla) == -1 && !tecla_especial)
-            return false;
+   
+    function red(){
+      alert('Actualizacion realizada');
+      window.location="../admin/index.php";
     }
     </script>
     <!--  -->
@@ -142,9 +124,8 @@ header("Location: ../admin/index.php");
                         <ul class="nav navbar-nav">
                             <li class="hvr-bounce-to-bottom"><a href="../admin/index.php">Inicio</a></li>
                             <li class="hvr-bounce-to-bottom"><a href="../php/form-registro-candidato.php">Inscribir candidato</a></li>
-                            <li class="hvr-bounce-to-bottom active"><a href="form-registro-eleccion.php">Crear elección</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="reportes.php">Reportes</a></li>
-                            <li class="hvr-bounce-to-bottom"><a href="#">Administrador: <?php $obj = new Usuario();
+                            <li class="hvr-bounce-to-bottom"><a href="form-registro-eleccion.php">Crear eleccion</a></li>
+                            <li class="hvr-bounce-to-bottom"><a href="#">Administrador :<?php $obj = new Usuario();
                             $obj->rol=1;
                             $obj->Session();?></a></li>
                            <!--  <li class="hvr-bounce-to-bottom"><a href="reports.html">Reportes</a></li>-->
@@ -155,27 +136,105 @@ header("Location: ../admin/index.php");
         </div>
     </div>
 <!-- //header -->
-  <a href="?volver"><img title="Jaime guzman" src="../img/volver.png" style="width: 38px; margin-left: 35px; margin-top: 3px;"></a>
+  <a href="?volver">Volver</a>
     <div class="about">
             <div class="container">
-                    <p class="eum">Por favor ingrese los datos solicitados a continuación para crear una elección.</p>
+                    <p class="eum">Por favor ingrese los datos solicitados a continuación para crear una eleccion.</p>
 
                 <div class="col-md-6 contact-top-right">
                         <div class="contact-textarea">
                                 <form  method="POST">
+
+                                      <?php 
+
+                                              if(isset($_GET['eleccion'])){
+
+                                              $eleccion=$_GET['eleccion'];    
+                                              
+                                   
+                                            $obj =new Eleccion();
+                                            $obj->modificar=false;
+                                            $obj->eleccion=$eleccion;
+                                             $obj->v1=true;
+                                             $obj->v2=false;
+                                             $obj->v3=false;
+                                             $obj->v4=false;
+                                             $obj->v5=false;
+                                            $val1=$obj->Modificar();
+                                             $obj->v1=false;
+                                             $obj->v2=true;
+                                             $obj->v3=false;
+                                             $obj->v4=false;
+                                             $obj->v5=false;
+                                            $val2=$obj->Modificar();
+                                             $obj->v1=false;
+                                             $obj->v2=false;
+                                             $obj->v3=true;
+                                             $obj->v4=false;
+                                             $obj->v5=false;
+                                            $val3=$obj->Modificar();
+                                             $obj->v1=false;
+                                             $obj->v2=false;
+                                             $obj->v3=false;
+                                             $obj->v4=true;
+                                             $obj->v5=false;
+                                            $val4=$obj->Modificar();
+                                             $obj->v1=false;
+                                             $obj->v2=false;
+                                             $obj->v3=false;
+                                             $obj->v4=false;
+                                             $obj->v5=true;
+                                            $val5=$obj->Modificar();
+
+
+                                                   if(isset($_POST['modificacion'])){
+                                            
+
+                                                    $obj =new Eleccion();
+                                                    $obj->eleccion=$eleccion;
+                                                    $obj->neleccion=$_POST['neleccion'];
+                                                    $obj->fechaini_in=$_POST['fecha-ini-in'];
+                                                    $obj->fechafin_in=$_POST['fecha-fin-in'];
+                                                    $obj->fechaini_vot=$_POST['fecha-ini-vot'];
+                                                    $obj->fechafin_vot=$_POST['fecha-fin-vot'];
+                                                    $obj->modificar=true;
+                                                    $obj->v1=false;
+                                                    $obj->v2=false;
+                                                    $obj->v3=false;
+                                                    $obj->v4=false;
+                                                    $obj->v5=false;
+                                                    $obj->Modificar();
+
+
+                                                 }
+
+                                              }
+                                     
+                                     
+                                       ?>
                              
 
                                      <label>Nombre de la eleccion :</label>
-                                     <input maxlength="50" onkeypress='return soloLetras(event)'   required="" name="neleccion" type="text">
+                                     <input maxlength="50"  required="" name="neleccion" type="text" value="<?php echo $val1 ?> ">
+                                     <br>
+                                     </br>
                                      <label >Fecha inicio de inscripcion :</label>
-                                     <input required="" type="text" name="fecha-ini-in" id="fecha"  >
+                                     <input required="" type="text" name="fecha-ini-in" id="fecha" value="<?php echo $val2 ?> " >
+                                     <br>
+                                     </br>
                                       <label>Fecha fin de inscripcion :</label>
-                                     <input required="" type="text" name="fecha-fin-in" id="fecha2"  >
+                                     <input required="" type="text" name="fecha-fin-in" id="fecha2" value="<?php echo $val3 ?> " >
+                                     <br>
+                                     </br>
                                      <label>Fecha inicio de votacion :</label>
-                                     <input required="" type="text" name="fecha-ini-vot" id="fecha3"  >
+                                     <input required="" type="text" name="fecha-ini-vot" id="fecha3" value="<?php echo $val4 ?> " >
+
+                                     <br>
+                                     </br>
                                      <label>Fecha fin de votacion :</label>
-                                     <input required="" type="text" name="fecha-fin-vot" id="fecha4"  >
-                                     <input name="registro" type="submit" value="Guardar"></input>
+                                     <input required="" type="text" name="fecha-fin-vot" id="fecha4" value="<?php echo $val5 ?> "  >
+                                     <input name="modificacion" type="submit" value="Guardar"></input>
+									 <a href="http://chaux.eshost.com.ar/Bussinesvote/admin/index.php>"<input type="submit" value="Cancelar"></input></a>
                                
                               
                                 </form>
@@ -187,26 +246,7 @@ header("Location: ../admin/index.php");
     </div>
 
 
-<?php
 
-
-if(isset($_POST['registro'])){
-
-
-  $obj =new Eleccion();
-  $neleccion=$_POST['neleccion'];
-  $fechaini_in=$_POST['fecha-ini-in'];
-  $fechafin_in=$_POST['fecha-fin-in'];
-  $fechaini_vot=$_POST['fecha-ini-vot'];
-  $fechafin_vot=$_POST['fecha-fin-vot'];
-  
-  $obj->Crear($neleccion,$fechaini_in,$fechafin_in,$fechaini_vot,$fechafin_vot);
-
-
-}
-
-
-?>
 
 </body>
 </html>

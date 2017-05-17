@@ -20,25 +20,6 @@ header("Location: ../admin/index.php");
       return (key >= 48 && key <= 57)
     }
 
-
-    //aquino
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = [8, 37, 39, 46];
-
-        tecla_especial = false
-        for(var i in especiales) {
-            if(key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if(letras.indexOf(tecla) == -1 && !tecla_especial)
-            return false;
-    }
     function red(){
       alert('Actualizacion realizada');
       window.location="../admin/index.php";
@@ -130,9 +111,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<label>Documento</label>
 									    <input   onkeypress='return soloNumeros(event)'  maxlength="15" required="" name="documento" type="text" />
 									    <label>Nombre de usuario :</label>
-									    <input maxlength="50" required="" required="" name="usuario" type="text" />
-									    <label>Contraseña :</label>
-									    <input maxlength="50" required="" name="password" type="password" />
+									    <input maxlength="50"  required="" name="usuario" type="text" />
+									    <label>Correo electronico :</label>
+									    <input maxlength="70" " required="" name="correo" type="email" />
 									    <?php
 
 									     $obj = new Genero();
@@ -166,11 +147,10 @@ if(isset($_POST['registro'])){
   $obj =new Votante();
   $documento=$_POST['documento'];
   $usuario=$_POST['usuario'];
-  $password=$_POST['password'];
-  $passencriptado=md5($password);
+  $correo=$_POST['correo'];
   $genero=$_POST['genero'];
   $nacimiento=$_POST['nacimiento'];
-  $obj->RegistrarUsuario($documento,$usuario,$passencriptado,$genero,$nacimiento);
+  $obj->RegistrarUsuario($documento,$usuario,$correo,$genero,$nacimiento);
 
 
 }

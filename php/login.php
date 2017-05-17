@@ -32,25 +32,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }
 
 
-//aquino
-function soloLetras(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toLowerCase();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-    especiales = [8, 37, 39, 46];
-
-    tecla_especial = false
-    for(var i in especiales) {
-        if(key == especiales[i]) {
-            tecla_especial = true;
-            break;
-        }
-    }
-
-    if(letras.indexOf(tecla) == -1 && !tecla_especial)
-        return false;
-}
 </script>
+<!--  -->
+
+<!-- script api recaptcha google-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <!--  -->
 
 <link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
@@ -119,6 +105,7 @@ function soloLetras(e) {
 								<input type="reset" value="Limpiar">
 
 								<br />
+								<div class="g-recaptcha" data-sitekey="6LfX5yAUAAAAAPwg6OY5gvWjHl5FXXYGzYmvrIvM"></div>
 								<!--<a href="create-account.php" class="eum2"><p class="eum2">¿Aún no estas regitrado? Regístrate aquí.</p></a>-->
 
 							</form>

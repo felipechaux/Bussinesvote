@@ -3,8 +3,8 @@
 class conexion{
   
 	  function dbconexion(){
-          ////////////////////////////conexion --> host , user , password , y nombre de la base de datos .
-	  $conexion = mysqli_connect("sql309.eshost.com.ar", "eshos_19709769", "pipecha", "eshos_19709769_bussinesvote");
+
+	  $conexion = mysqli_connect("localhost", "root", "", "bd_bussinesvote");
       $conexion->set_charset("utf8");
 	  if (mysqli_connect_errno($conexion)) {
 	      echo "Fallo al contenctar a MySQL: " . mysqli_connect_error();
